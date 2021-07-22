@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class ScrabbleWord {
 	private String word;
@@ -17,15 +18,23 @@ public class ScrabbleWord {
 	}
 	
 	/**
+	 * Sorts the characters of the word alphabetically and returns the resulting string.
+	 */
+	public String normalize() {
+		char[] word = this.word.toCharArray();
+		Arrays.sort(word);
+		return String.valueOf(word);
+	}
+	
+	/**
 	 * Computes the hash code of the ScrabbleWord.
 	 */
 	public int hashCode() {
-		//final int HASH_MULTIPLIER = 43;
 		final int HASH_MULTIPLIER = 7;
 		int hash = 0;
+		String normalizedWord = this.normalize();
 		for(int i = 0; i < word.length(); i++) {
-			//hash += HASH_MULTIPLIER * word.charAt(i); //for permutations to end up in the same bucket
-			hash += Math.pow(HASH_MULTIPLIER, word.length() - 1 - i) * word.charAt(i);
+			hash += Math.pow(HASH_MULTIPLIER, word.length() - 1 - i) * normalizedWord.charAt(i);
 		}
 		return hash;
 	}

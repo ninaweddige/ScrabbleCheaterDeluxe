@@ -39,11 +39,14 @@ public class HashTableClass implements HashTable {
 	public ArrayList<Object> lookup(Object element) {
 		
 		ArrayList<Object> objects = new ArrayList<>();
-		if(!contains(element)) {
-			return objects;
-		}
+//		if(!contains(element)) {
+//			return objects;
+//		}
 		int index = element.hashCode() % buckets.length;
 		Node n = buckets[index];
+		
+		if(n == null) return objects;
+		
 		while(n.next != null) {
 			objects.add(n.data);
 			n = n.next;
